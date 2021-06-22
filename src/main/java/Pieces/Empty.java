@@ -1,7 +1,7 @@
 
 package Pieces;
 
-public class Empty extends Pieces{
+public class Empty extends Pieces{//empty field on the board
     
     public Empty() {
         this.piece = ' ';
