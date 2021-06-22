@@ -1,6 +1,5 @@
 Logic:
-    - Skopiować potrzebne metody z klasy Logic
     - Metoda sprawdzająca czy jest szach, mat lub pat
 
 Pieces:
-    - Może dodać klasy abstrakcyjne White i Black dla łatwiejszej logiki gry
+    - implementacja metod isMoveValid wszystkich klas

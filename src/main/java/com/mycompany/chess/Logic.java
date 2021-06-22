@@ -3,6 +3,7 @@ package com.mycompany.chess;
 
 import Pieces.*;
 
+
 public class Logic {
     private Pieces[][] logicBoard;
     private Board board;
@@ -11,8 +12,8 @@ public class Logic {
     private boolean changePlayer;
     
     public Logic() {
-        this.logicBoard = new Pieces[8][8];
         this.board = new Board();
+        this.logicBoard = board.getBoard();
         this.changePlayer = false;
         this.player = "White";
         this.enemy = "Black";
@@ -22,11 +23,15 @@ public class Logic {
         changePlayer = false;
         
         int[] coordinates = convertCommandToCoordinates(command);
-        
+        logicBoard = board.getBoard();
         Pieces piece = logicBoard[coordinates[0]][coordinates[1]];
+
+     System.out.println(piece.getClass().getSuperclass().getSimpleName()); //test
         
-        if(piece.isMoveValid(coordinates)){
-            logicBoard = board.getBoard();
+        
+        if(piece.isMoveValid(coordinates, this.logicBoard, this.enemy, this.player) && (piece.getClass().getSuperclass().getSimpleName().equals(player))){
+            if(piece.getClass().getSimpleName().equals("WhitePawn") || piece.getClass().getSimpleName().equals("BlackPawn")) piece.beenMoved();
+            
             logicBoard[coordinates[0]][coordinates[1]] = new Empty();
             logicBoard[coordinates[2]][coordinates[3]] = piece;
             board.printBoard();
@@ -100,5 +105,13 @@ public class Logic {
 
     public String getPlayer() {
         return player;
+    }
+    
+    public String getEnemy(){
+        return enemy;
+    }
+    
+    public Pieces[][] getLogicBoard(){
+        return this.logicBoard;
     }
 }
