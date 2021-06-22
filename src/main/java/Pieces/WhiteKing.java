@@ -8,7 +8,7 @@ public class WhiteKing extends Pieces{
     }
 
     @Override
-    public boolean isMoveValid() {
+    public boolean isMoveValid(int[] coordinates) {
         return true;
     }
     

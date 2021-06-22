@@ -15,21 +15,23 @@ public class Logic {
         this.board = new Board();
         this.changePlayer = false;
         this.player = "White";
+        this.enemy = "Black";
     }
     
     public Pieces[][] move(String command){
-        int[] coordinates = convertCommandToCoordinates(command);
-        Pieces piece = logicBoard[coordinates[0]][coordinates[1]];
-        logicBoard = board.getBoard();
-
         changePlayer = false;
         
-        logicBoard[coordinates[0]][coordinates[1]] = new Empty();
-        logicBoard[coordinates[2]][coordinates[3]] = piece;
+        int[] coordinates = convertCommandToCoordinates(command);
         
-        board.printBoard();
+        Pieces piece = logicBoard[coordinates[0]][coordinates[1]];
         
-        changePlayer = true;
+        if(piece.isMoveValid(coordinates)){
+            logicBoard = board.getBoard();
+            logicBoard[coordinates[0]][coordinates[1]] = new Empty();
+            logicBoard[coordinates[2]][coordinates[3]] = piece;
+            board.printBoard();
+            changePlayer = true;
+        }else System.out.println("Move invalid");
         
         
         return logicBoard;
@@ -44,7 +46,11 @@ public class Logic {
     }
     
     public void changePlayer(){
+        if(player.equals("White")) player = "Black";
+        else player = "White";
         
+        if(enemy.equals("Black")) enemy = "White";
+        else enemy = "Black";
     }
     
     public int[] convertCommandToCoordinates(String command){

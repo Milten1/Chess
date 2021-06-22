@@ -4,7 +4,7 @@ package Pieces;
 public abstract class Pieces {
     protected char piece;
     
-    public abstract boolean isMoveValid();
+    public abstract boolean isMoveValid(int[] coordinates);
     
     @Override
     public String toString() {
