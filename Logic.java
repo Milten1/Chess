@@ -3,6 +3,7 @@ package com.mycompany.chess;
 
 import Pieces.*;
 
+
 public class Logic {
     private Pieces[][] logicBoard;
     private Board board;
@@ -11,25 +12,31 @@ public class Logic {
     private boolean changePlayer;
     
     public Logic() {
-        this.logicBoard = new Pieces[8][8];
         this.board = new Board();
+        this.logicBoard = board.getBoard();
         this.changePlayer = false;
         this.player = "White";
+        this.enemy = "Black";
     }
     
     public Pieces[][] move(String command){
-        int[] coordinates = convertCommandToCoordinates(command);
-        Pieces piece = logicBoard[coordinates[0]][coordinates[1]];
-        logicBoard = board.getBoard();
-
         changePlayer = false;
         
-        logicBoard[coordinates[0]][coordinates[1]] = new Empty();
-        logicBoard[coordinates[2]][coordinates[3]] = piece;
+        int[] coordinates = convertCommandToCoordinates(command);
+        logicBoard = board.getBoard();
+        Pieces piece = logicBoard[coordinates[0]][coordinates[1]];
+
+     System.out.println(piece.getClass().getSuperclass().getSimpleName()); //test
         
-        board.printBoard();
         
-        changePlayer = true;
+        if(piece.isMoveValid(coordinates, this.logicBoard, this.enemy, this.player) && (piece.getClass().getSuperclass().getSimpleName().equals(player))){
+            if(piece.getClass().getSimpleName().equals("WhitePawn") || piece.getClass().getSimpleName().equals("BlackPawn")) piece.beenMoved();
+            
+            logicBoard[coordinates[0]][coordinates[1]] = new Empty();
+            logicBoard[coordinates[2]][coordinates[3]] = piece;
+            board.printBoard();
+            changePlayer = true;
+        }else System.out.println("Move invalid");
         
         
         return logicBoard;
@@ -44,7 +51,11 @@ public class Logic {
     }
     
     public void changePlayer(){
+        if(player.equals("White")) player = "Black";
+        else player = "White";
         
+        if(enemy.equals("Black")) enemy = "White";
+        else enemy = "Black";
     }
     
     public int[] convertCommandToCoordinates(String command){
@@ -94,5 +105,13 @@ public class Logic {
 
     public String getPlayer() {
         return player;
+    }
+    
+    public String getEnemy(){
+        return enemy;
+    }
+    
+    public Pieces[][] getLogicBoard(){
+        return this.logicBoard;
     }
 }
