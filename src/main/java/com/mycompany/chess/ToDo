@@ -1,5 +1,0 @@
-Logic:
-    - Metoda sprawdzająca czy jest szach, mat lub pat
-
-Pieces:
-    - implementacja metod isMoveValid wszystkich klas
