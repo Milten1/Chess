@@ -26,7 +26,7 @@ public class Logic {
         logicBoard = board.getBoard();
         Pieces piece = logicBoard[coordinates[0]][coordinates[1]];
 
-     System.out.println(piece.getClass().getSuperclass().getSimpleName()); //test
+     //System.out.println(piece.getClass().getSuperclass().getSimpleName()); //test
         
         
         if(piece.isMoveValid(coordinates, this.logicBoard, this.enemy, this.player) && (piece.getClass().getSuperclass().getSimpleName().equals(player))){
