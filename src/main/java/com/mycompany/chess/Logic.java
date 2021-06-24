@@ -31,6 +31,7 @@ public class Logic {
         
         if(piece.isMoveValid(coordinates, this.logicBoard, this.enemy, this.player) && (piece.getClass().getSuperclass().getSimpleName().equals(player))){
             if(piece.getClass().getSimpleName().equals("WhitePawn") || piece.getClass().getSimpleName().equals("BlackPawn")) piece.beenMoved();
+            if(piece.getClass().getSimpleName().equals("WhiteKing") || piece.getClass().getSimpleName().equals("BlackKing")) piece.beenMoved();
             
             logicBoard[coordinates[0]][coordinates[1]] = new Empty();
             logicBoard[coordinates[2]][coordinates[3]] = piece;
