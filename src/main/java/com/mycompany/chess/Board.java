@@ -23,8 +23,10 @@ public class Board {
        }
         
         board[3][3] = new WhiteRook();
-        board[1][3] = new WhitePawn();
-        board[6][1] = new BlackRook();
+        board[5][1] = new WhitePawn();
+        board[1][1] = new WhitePawn();
+        board[5][5] = new WhitePawn();
+        board[1][5] = new WhitePawn();
     }
     
     

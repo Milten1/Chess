@@ -14,18 +14,14 @@ public class WhiteRook extends White{
         
         
         if(coordinates[0] == coordinates[2]){
-            if(coordinates[1] < coordinates[3]){//ruch w prawo
-                System.out.println("right");
+            if(coordinates[1] < coordinates[3]){//right
                 for(int j = coordinates[1]+1; j <= coordinates[3];j++){
-                    System.out.println(board[coordinates[0]][j].getClass().getSimpleName());
                     if(!((board[coordinates[0]][j].getClass().getSimpleName().equals("Empty")) || (board[coordinates[0]][j].getClass().getSuperclass().getSimpleName().equals(enemy)))) return false;
                 }
                 return true;
                 
-            }else{//ruch w lewo
-                System.out.println("left");
+            }else{//left
                 for(int j = coordinates[1]-1; j >= coordinates[3];j--){
-                    System.out.println(board[coordinates[0]][j].getClass().getSimpleName());
                     if(!((board[coordinates[0]][j].getClass().getSimpleName().equals("Empty")) || (board[coordinates[0]][j].getClass().getSuperclass().getSimpleName().equals(enemy)))) return false;
                 }
                 return true;
@@ -33,18 +29,13 @@ public class WhiteRook extends White{
         }
         
         if(coordinates[1] == coordinates[3]){
-            if(coordinates[0] < coordinates[2]){//ruch w górę
-                System.out.println("up");
+            if(coordinates[0] < coordinates[2]){//UP
                 for(int i = coordinates[0]+1; i <= coordinates[2];i++){
-                    System.out.println(board[i][coordinates[1]].getClass().getSimpleName());
-                    System.out.println(board[i][coordinates[1]].getClass().getSuperclass().getSimpleName());
                     if(!((board[i][coordinates[1]].getClass().getSimpleName().equals("Empty")) || (board[i][coordinates[1]].getClass().getSuperclass().getSimpleName().equals(enemy)))) return false;
                 }
                 return true;
-            }else{//ruch w dół
-                System.out.println("down");
+            }else{//down
                 for(int i = coordinates[0]-1; i >= coordinates[2];i--){
-                    System.out.println(board[i][coordinates[1]].getClass().getSimpleName());
                     if(!((board[i][coordinates[1]].getClass().getSimpleName().equals("Empty")) || (board[i][coordinates[1]].getClass().getSuperclass().getSimpleName().equals(enemy)))) return false;
                 }
                 return true;
