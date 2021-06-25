@@ -87,7 +87,7 @@ public class Game {
             default: {
                 board.setBoard(logic.move(command));
                 
-                //if(logic.getChangePlayer() == true) logic.changePlayer();
+                if(logic.getChangePlayer() == true) logic.changePlayer();
                 
                 System.out.println("Move of player: " + logic.getPlayer());
             }
