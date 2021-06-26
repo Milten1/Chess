@@ -3,6 +3,7 @@ package Pieces;
 
 public abstract class Pieces {
     protected char piece;
+    protected boolean hasBeenMoved;
     
     public abstract boolean isMoveValid(int[] coordinates, Pieces[][] board, String enemy, String player);
     
@@ -12,5 +13,9 @@ public abstract class Pieces {
     }
 
     public abstract void beenMoved();
+
+    public boolean hasBeenMoved() {
+        return this.hasBeenMoved;
+    }
     
 }
