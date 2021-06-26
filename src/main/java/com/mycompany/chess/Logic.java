@@ -2,6 +2,7 @@
 package com.mycompany.chess;
 
 import Pieces.*;
+import java.util.Scanner;
 
 
 public class Logic {
@@ -23,7 +24,9 @@ public class Logic {
         changePlayer = false;
         
         int[] coordinates = convertCommandToCoordinates(command);
+        
         logicBoard = board.getBoard();
+        
         Pieces piece = logicBoard[coordinates[0]][coordinates[1]];
 
      //System.out.println(piece.getClass().getSuperclass().getSimpleName()); //test
@@ -32,12 +35,22 @@ public class Logic {
         if(piece.isMoveValid(coordinates, this.logicBoard, this.enemy, this.player) && (piece.getClass().getSuperclass().getSimpleName().equals(player))){
             if(piece.getClass().getSimpleName().equals("WhitePawn") || piece.getClass().getSimpleName().equals("BlackPawn")) piece.beenMoved();
             if(piece.getClass().getSimpleName().equals("WhiteKing") || piece.getClass().getSimpleName().equals("BlackKing")) piece.beenMoved();
+            if(piece.getClass().getSimpleName().equals("WhiteRook") || piece.getClass().getSimpleName().equals("BlackRook")) piece.beenMoved();
             
             logicBoard[coordinates[0]][coordinates[1]] = new Empty();
             logicBoard[coordinates[2]][coordinates[3]] = piece;
+            
+            if((coordinates[2] == 7 && piece.getClass().getSimpleName().equals("WhitePawn")) || 
+                    (coordinates[2] == 0 && piece.getClass().getSimpleName().equals("BlackPawn"))) logicBoard = pawnPromotiom(logicBoard, coordinates);
+            
+            
             board.printBoard();
+            
+            
+            
             changePlayer = true;
         }else System.out.println("Move invalid");
+        
         
         
         return logicBoard;
@@ -114,5 +127,41 @@ public class Logic {
     
     public Pieces[][] getLogicBoard(){
         return this.logicBoard;
+    }
+
+    private Pieces[][] pawnPromotiom(Pieces[][] board, int[] coordinates) {
+        System.out.println("Choose piece you want to promote pawn to: \n"
+                + "1. Queen  \n"
+                + "2. Rook   \n"
+                + "3. Bishop \n"
+                + "4. Knight");
+        
+        Scanner s = new Scanner(System.in);
+        int choose = s.nextInt();
+        
+        switch(choose){
+            case 1: {
+                if(coordinates[2] == 7) board[coordinates[2]][coordinates[3]] = new WhiteQueen();
+                else board[coordinates[2]][coordinates[3]] = new BlackQueen();
+                break;
+            }
+            case 2: {
+                if(coordinates[2] == 7) board[coordinates[2]][coordinates[3]] = new WhiteRook();
+                else board[coordinates[2]][coordinates[3]] = new BlackRook();
+                break;
+            }
+            case 3: {
+                if(coordinates[2] == 7) board[coordinates[2]][coordinates[3]] = new WhiteBishop();
+                else board[coordinates[2]][coordinates[3]] = new BlackBishop();
+                break;
+            }
+            case 4: {
+                if(coordinates[2] == 7) board[coordinates[2]][coordinates[3]] = new WhiteKnight();
+                else board[coordinates[2]][coordinates[3]] = new BlackKnight();
+                break;
+            }
+            
+        }
+        return board;
     }
 }

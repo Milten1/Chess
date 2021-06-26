@@ -12,6 +12,9 @@ public class WhitePawn extends White{
     @Override
     public boolean isMoveValid(int[] coordinates, Pieces[][] board, String enemy, String player) {
         
+        if(coordinates[0] == coordinates[2] && coordinates[1] == coordinates[3]) return false;
+        
+        
         if(!hasBeenMoved){
             if((coordinates[1] == coordinates[3]) && (Math.abs(coordinates[2]-coordinates[0]) == 1) || ((coordinates[1] == coordinates[3]) && 
                     (Math.abs(coordinates[2]-coordinates[0]) == 2)) && board[coordinates[2]][coordinates[3]].getClass().getSimpleName().equals("Empty")) return true;
