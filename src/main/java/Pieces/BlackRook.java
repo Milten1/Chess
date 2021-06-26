@@ -2,9 +2,12 @@
 package Pieces;
 
 public class BlackRook extends Black{
+    private boolean hasBeenMoved;
+
     
     public BlackRook() {
         this.piece = '♜';
+        this.hasBeenMoved = false;
     }
 
     @Override
@@ -47,6 +50,7 @@ public class BlackRook extends Black{
     
     @Override
     public void beenMoved() {
+        this.hasBeenMoved = true;
     }
     
 }

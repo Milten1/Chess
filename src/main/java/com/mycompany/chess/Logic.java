@@ -23,13 +23,52 @@ public class Logic {
     public Pieces[][] move(String command){
         changePlayer = false;
         
-        int[] coordinates = convertCommandToCoordinates(command);
-        
         logicBoard = board.getBoard();
         
+        int[] coordinates = convertCommandToCoordinates(command);
+        
         Pieces piece = logicBoard[coordinates[0]][coordinates[1]];
-
-     //System.out.println(piece.getClass().getSuperclass().getSimpleName()); //test
+        
+        if((piece.getClass().getSimpleName().equals("WhiteKing") && piece.hasBeenMoved() == false && coordinates[2] == 0 && coordinates[3] == 6 && logicBoard[0][7].hasBeenMoved() == false) || 
+              (piece.getClass().getSimpleName().equals("WhiteKing") && piece.hasBeenMoved() == false && coordinates[2] == 0 && coordinates[3] == 2 && logicBoard[0][0].hasBeenMoved() == false) || 
+              (piece.getClass().getSimpleName().equals("BlackKing") && piece.hasBeenMoved() == false && coordinates[2] == 7 && coordinates[3] == 6 && logicBoard[7][7].hasBeenMoved() == false  ||
+              (piece.getClass().getSimpleName().equals("BlackKing") && piece.hasBeenMoved() == false && coordinates[2] == 7 && coordinates[3] == 2 && logicBoard[7][0].hasBeenMoved() == false))){
+            
+            if(isCastlingValid(logicBoard, coordinates) && (piece.getClass().getSuperclass().getSimpleName().equals(player))){
+                
+                if(piece.getClass().getSimpleName().equals("WhitePawn") || piece.getClass().getSimpleName().equals("BlackPawn")) piece.beenMoved();
+                if(piece.getClass().getSimpleName().equals("WhiteKing") || piece.getClass().getSimpleName().equals("BlackKing")) piece.beenMoved();
+                if(piece.getClass().getSimpleName().equals("WhiteRook") || piece.getClass().getSimpleName().equals("BlackRook")) piece.beenMoved();
+                
+                logicBoard[coordinates[0]][coordinates[1]] = new Empty();
+                logicBoard[coordinates[2]][coordinates[3]] = piece;
+                
+                if(coordinates[2] == 0 && coordinates[3] == 6){
+                    logicBoard[0][7] = new Empty();
+                    logicBoard[0][5] = new WhiteRook();
+                    logicBoard[0][5].beenMoved();
+                }else if(coordinates[2] == 0 && coordinates[3] == 2){
+                    logicBoard[0][0] = new Empty();
+                    logicBoard[0][3] = new WhiteRook();
+                    logicBoard[0][5].beenMoved();
+                }else if(coordinates[2] == 7 && coordinates[3] == 6){
+                    logicBoard[7][7] = new Empty();
+                    logicBoard[7][5] = new BlackRook();
+                    logicBoard[7][5].beenMoved();
+                }else if(coordinates[2] == 7 && coordinates[3] == 2){
+                    logicBoard[7][0] = new Empty();
+                    logicBoard[7][3] = new BlackRook();
+                    logicBoard[7][3].beenMoved();
+                }
+                
+                board.printBoard();
+                
+                changePlayer = true;
+            }else System.out.println("Move invalid");
+            
+            return logicBoard;
+        }
+        
         
         
         if(piece.isMoveValid(coordinates, this.logicBoard, this.enemy, this.player) && (piece.getClass().getSuperclass().getSimpleName().equals(player))){
@@ -129,7 +168,7 @@ public class Logic {
         return this.logicBoard;
     }
 
-    private Pieces[][] pawnPromotiom(Pieces[][] board, int[] coordinates) {
+    public Pieces[][] pawnPromotiom(Pieces[][] board, int[] coordinates) {
         System.out.println("Choose piece you want to promote pawn to: \n"
                 + "1. Queen  \n"
                 + "2. Rook   \n"
@@ -164,4 +203,15 @@ public class Logic {
         }
         return board;
     }
+    
+    public boolean isCastlingValid(Pieces[][] board, int[] coordinates){
+       
+        
+        
+        
+        
+        
+        return true;
+        
+    }    
 }

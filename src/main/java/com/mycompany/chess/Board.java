@@ -22,11 +22,12 @@ public class Board {
             }
        }
         
-        board[3][3] = new WhiteQueen();
-        board[5][1] = new WhitePawn();
-        board[1][1] = new WhitePawn();
-        board[6][5] = new WhitePawn();
-        board[1][5] = new WhitePawn();
+        board[0][4] = new WhiteKing();
+        board[7][4] = new BlackKing();
+        board[0][0] = new WhiteRook();
+        board[0][7] = new WhiteRook();
+        board[7][7] = new BlackRook();
+        board[7][0] = new BlackRook();
     }
     
     
