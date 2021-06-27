@@ -64,7 +64,7 @@ public class Logic {
                 board.printBoard();
                 
                 changePlayer = true;
-            }else System.out.println("Move invalid");
+            }else System.out.println("castling Move invalid");
             
             return logicBoard;
         }
@@ -205,13 +205,126 @@ public class Logic {
     }
     
     public boolean isCastlingValid(Pieces[][] board, int[] coordinates){
+        
+        Pieces piece = board[coordinates[0]][coordinates[1]];
        
+        if((piece.getClass().getSimpleName().equals("WhiteKing")) && coordinates[2] == 0 && coordinates[3] == 6){//krótka roszada
+            for(int i = coordinates[1]+1; i <= coordinates[3]; i++){
+                if(!(board[0][i].getClass().getSimpleName().equals("Empty"))) return false;
+            }
+            
+            int[] coor1 = new int[4];
+            coor1[2] = 0;
+            coor1[3] = 5;
+            
+            int[] coor2 = new int[4];
+            coor2[2] = 0;
+            coor2[3] = 6;
+            
+            for(int i = 0; i < 8; i++){
+                for(int j = 0; j < 8; j++){
+                    coor1[0] = i;
+                    coor1[1] = j;
+                    coor2[0] = i;
+                    coor2[1] = j;
+                    
+                    if(board[i][j].getClass().getSuperclass().getSimpleName().equals(enemy)){
+                        if(board[i][j].isMoveValid(coor1, board, enemy, player) || board[i][j].isMoveValid(coor2, board, enemy, player)) return false;
+                    }
+                }
+            }
+            
+            return true;
+            
+        } else if(coordinates[2] == 0 && coordinates[3] == 2){ //długa
+            for(int i = coordinates[1]-1; i >= coordinates[3]-1; i--){
+                if(!(board[0][i].getClass().getSimpleName().equals("Empty"))) return false;
+            }
+            
+            int[] coor1 = new int[4];
+            coor1[2] = 0;
+            coor1[3] = 2;
+            
+            int[] coor2 = new int[4];
+            coor2[2] = 0;
+            coor2[3] = 3;
+            
+            for(int i = 0; i < 8; i++){
+                for(int j = 0; j < 8; j++){
+                    coor1[0] = i;
+                    coor1[1] = j;
+                    coor2[0] = i;
+                    coor2[1] = j;
+                    
+                    if(board[i][j].getClass().getSuperclass().getSimpleName().equals(enemy)){
+                        if(board[i][j].isMoveValid(coor1, board, enemy, player) || board[i][j].isMoveValid(coor2, board, enemy, player)) return false;
+                    }
+                }
+            }
+            
+            return true;
+            
+        }
         
         
-        
-        
-        
-        return true;
+        if((piece.getClass().getSimpleName().equals("BlackKing")) && coordinates[2] == 7 && coordinates[3] == 6){//krótka roszada
+            for(int i = coordinates[1]+1; i <= coordinates[3]; i++){
+                if(!(board[0][i].getClass().getSimpleName().equals("Empty"))) return false;
+            }
+            
+            int[] coor1 = new int[4];
+            coor1[2] = 7;
+            coor1[3] = 5;
+            
+            int[] coor2 = new int[4];
+            coor2[2] = 7;
+            coor2[3] = 6;
+            
+            for(int i = 0; i < 8; i++){
+                for(int j = 0; j < 8; j++){
+                    coor1[0] = i;
+                    coor1[1] = j;
+                    coor2[0] = i;
+                    coor2[1] = j;
+                    
+                    if(board[i][j].getClass().getSuperclass().getSimpleName().equals(enemy)){
+                        if(board[i][j].isMoveValid(coor1, board, enemy, player) || board[i][j].isMoveValid(coor2, board, enemy, player)) return false;
+                    }
+                }
+            }
+            
+            return true;
+            
+        } else if(coordinates[2] == 7 && coordinates[3] == 2){ //długa
+            for(int i = coordinates[1]-1; i >= coordinates[3]-1; i--){
+                if(!(board[0][i].getClass().getSimpleName().equals("Empty"))) return false;
+            }
+            
+            int[] coor1 = new int[4];
+            coor1[2] = 7;
+            coor1[3] = 2;
+            
+            int[] coor2 = new int[4];
+            coor2[2] = 7;
+            coor2[3] = 3;
+            
+            for(int i = 0; i < 8; i++){
+                for(int j = 0; j < 8; j++){
+                    coor1[0] = i;
+                    coor1[1] = j;
+                    coor2[0] = i;
+                    coor2[1] = j;
+                    
+                    if(board[i][j].getClass().getSuperclass().getSimpleName().equals(enemy)){
+                        if(board[i][j].isMoveValid(coor1, board, enemy, player) || board[i][j].isMoveValid(coor2, board, enemy, player)) return false;
+                    }
+                }
+            }
+            
+            return true;
+            
+        }
+        return false;
         
     }    
 }

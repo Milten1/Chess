@@ -28,6 +28,8 @@ public class Board {
         board[0][7] = new WhiteRook();
         board[7][7] = new BlackRook();
         board[7][0] = new BlackRook();
+        
+        board[2][1] = new BlackBishop();
     }
     
     
