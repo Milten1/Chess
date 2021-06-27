@@ -9,8 +9,8 @@ public class Board {
     public Board() {
         board = new Pieces[8][8];
         
-//        initializeBoard();
-        testBoard();
+        initializeBoard();
+       // testBoard();
     }
     
     public void testBoard(){
@@ -29,7 +29,8 @@ public class Board {
         board[7][7] = new BlackRook();
         board[7][0] = new BlackRook();
         
-        board[2][1] = new BlackBishop();
+        board[2][2] = new BlackBishop();
+        board[1][3] = new WhitePawn();
     }
     
     
