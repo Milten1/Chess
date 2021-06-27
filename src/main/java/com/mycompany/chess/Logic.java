@@ -11,6 +11,7 @@ public class Logic {
     private String player;
     private String enemy;
     private boolean changePlayer;
+    private boolean isEnd;
     
     public Logic() {
         this.board = new Board();
@@ -64,14 +65,15 @@ public class Logic {
                 board.printBoard();
                 
                 changePlayer = true;
-            }else System.out.println("castling Move invalid");
+            }else System.out.println("Move invalid");
             
             return logicBoard;
         }
         
         
         
-        if(piece.isMoveValid(coordinates, this.logicBoard, this.enemy, this.player) && (piece.getClass().getSuperclass().getSimpleName().equals(player))){
+        if(piece.isMoveValid(coordinates, this.logicBoard, this.enemy, this.player) && (piece.getClass().getSuperclass().getSimpleName().equals(player)) 
+                && notInCheckAfterMove(coordinates, this.logicBoard, this.enemy, this.player)){
             if(piece.getClass().getSimpleName().equals("WhitePawn") || piece.getClass().getSimpleName().equals("BlackPawn")) piece.beenMoved();
             if(piece.getClass().getSimpleName().equals("WhiteKing") || piece.getClass().getSimpleName().equals("BlackKing")) piece.beenMoved();
             if(piece.getClass().getSimpleName().equals("WhiteRook") || piece.getClass().getSimpleName().equals("BlackRook")) piece.beenMoved();
@@ -90,14 +92,29 @@ public class Logic {
             changePlayer = true;
         }else System.out.println("Move invalid");
         
+        if(this.changePlayer) changePlayer();
         
+        if(isInCheck(logicBoard, enemy, player)) System.out.println(this.player + " player is in check!");
+        
+        isEndOfTheGame(this.logicBoard, this.enemy, this.player);
         
         return logicBoard;
     }
     
-    public boolean isEndOfTheGame(){
-        return false;
+    public void isEndOfTheGame(Pieces[][] board, String enemy, String player){
+        
+        Pieces[][] tempBoard = board;
+        
+        if(isInCheck(board, enemy, player)) {
+            
+           //sprawdza wszystkie mozliwe ruchy i czy po wykonaniu ruchu nadal będzie szach, jeśli tak gra jest zakończona
+            
+            if(false) this.isEnd = true;
+        }
+        
+        
     }
+    
     
     public boolean getChangePlayer(){
         return this.changePlayer;
@@ -326,5 +343,89 @@ public class Logic {
         }
         return false;
         
-    }    
+    }
+    
+    public boolean isInCheck(Pieces[][] board, String enemy, String player){
+        
+        if(player.equals("White")){
+            for(int i = 0; i < 8; i++){
+                for(int j = 0; j < 8; j++){
+                    if(board[i][j].getClass().getSuperclass().getSimpleName().equals(player) && board[i][j].getClass().getSimpleName().equals("WhiteKing")){
+                        
+                        int[] coor1 = new int[4];
+                        
+                        coor1[2] = i;
+                        coor1[3] = j;
+                        
+                        for(int x = 0; x < 8; x++){
+                            for(int y = 0; y < 8; y++){
+                                coor1[0] = x;
+                                coor1[1] = y;
+                                
+                                
+                                if(board[x][y].getClass().getSuperclass().getSimpleName().equals(enemy)){
+                                    if(board[x][y].isMoveValid(coor1, board, player, enemy)){
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        else if(player.equals("Black")){
+            for(int i = 0; i < 8; i++){
+                for(int j = 0; j < 8; j++){
+                    if(board[i][j].getClass().getSuperclass().getSimpleName().equals(player) && board[i][j].getClass().getSimpleName().equals("BlackKing")){
+                        
+                        int[] coor1 = new int[4];
+                        
+                        coor1[2] = i;
+                        coor1[3] = j;
+                        
+                        for(int x = 0; x < 8; x++){
+                            for(int y = 0; y < 8; y++){
+                                coor1[0] = x;
+                                coor1[1] = y;
+                                
+                                
+                                if(board[x][y].getClass().getSuperclass().getSimpleName().equals(enemy)){
+                                    if(board[x][y].isMoveValid(coor1, board, player, enemy)){
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    
+    public boolean notInCheckAfterMove(int[] coor, Pieces[][] board, String enemy, String player){
+        
+        Pieces[][] tempBoard = board;
+        
+        
+        Pieces piece = tempBoard[coor[0]][coor[1]];
+        
+        tempBoard[coor[0]][coor[1]] = new Empty();
+        tempBoard[coor[2]][coor[3]] = piece;
+        
+        
+        if(isInCheck(tempBoard, enemy, player)){
+            System.out.println("in check after move");
+        }
+        
+        return !(isInCheck(tempBoard, enemy, player));
+    }
+    
+    public boolean getIsEnd(){
+        return this.isEnd;
+    }
 }

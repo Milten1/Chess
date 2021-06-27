@@ -20,7 +20,7 @@ public class Game {
         
         while(true){
             
-            if(logic.isEndOfTheGame()) break;
+            if(logic.getIsEnd()) break;
             
             System.out.print("> ");
             String command = scanner.next();
@@ -31,7 +31,7 @@ public class Game {
             
         }
         
-      
+        System.out.println("Game is over");
         
         System.out.println("Do you want to play again? (y/n)");
         String command = scanner.next();
@@ -41,11 +41,9 @@ public class Game {
     
     public void newGame(){
         board.initializeBoard();
+        this.logic = new Logic();
         start();
     }
-    
-    
-    
     
     public void commands(String command){
         
@@ -87,7 +85,7 @@ public class Game {
             default: {
                 board.setBoard(logic.move(command));
                 
-                if(logic.getChangePlayer() == true) logic.changePlayer();
+//                if(logic.getChangePlayer() == true) logic.changePlayer();
                 
                 System.out.println("Move of player: " + logic.getPlayer());
             }
