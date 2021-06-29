@@ -73,7 +73,9 @@ public class Logic {
         
         
         if(piece.isMoveValid(coordinates, this.logicBoard, this.enemy, this.player) && (piece.getClass().getSuperclass().getSimpleName().equals(player)) 
-                && notInCheckAfterMove(coordinates, this.logicBoard, this.enemy, this.player)){
+                // && notInCheckAfterMove(coordinates, this.logicBoard, this.enemy, this.player)
+                )
+        {
             if(piece.getClass().getSimpleName().equals("WhitePawn") || piece.getClass().getSimpleName().equals("BlackPawn")) piece.beenMoved();
             if(piece.getClass().getSimpleName().equals("WhiteKing") || piece.getClass().getSimpleName().equals("BlackKing")) piece.beenMoved();
             if(piece.getClass().getSimpleName().equals("WhiteRook") || piece.getClass().getSimpleName().equals("BlackRook")) piece.beenMoved();
@@ -94,9 +96,9 @@ public class Logic {
         
         if(this.changePlayer) changePlayer();
         
-        if(isInCheck(logicBoard, enemy, player)) System.out.println(this.player + " player is in check!");
+      //  if(isInCheck(logicBoard, enemy, player)) System.out.println(this.player + " player is in check!");
         
-        isEndOfTheGame(this.logicBoard, this.enemy, this.player);
+      //  isEndOfTheGame(this.logicBoard, this.enemy, this.player);
         
         return logicBoard;
     }
