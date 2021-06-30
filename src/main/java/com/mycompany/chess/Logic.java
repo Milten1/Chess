@@ -96,9 +96,9 @@ public class Logic {
         
         if(this.changePlayer) changePlayer();
         
-      //  if(isInCheck(logicBoard, enemy, player)) System.out.println(this.player + " player is in check!");
+      if(isInCheck(logicBoard, enemy, player)) System.out.println(this.player + " player is in check!");
         
-      //  isEndOfTheGame(this.logicBoard, this.enemy, this.player);
+        isEndOfTheGame(this.logicBoard, this.enemy, this.player);
         
         return logicBoard;
     }
