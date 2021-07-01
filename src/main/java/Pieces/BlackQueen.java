@@ -11,6 +11,8 @@ public class BlackQueen extends Black{
     public boolean isMoveValid(int[] coordinates, Pieces[][] board, String enemy, String player) {
         
         if(coordinates[0] == coordinates[2] && coordinates[1] == coordinates[3]) return false;
+        if(!(board[coordinates[2]][coordinates[3]].getClass().getSuperclass().getSimpleName().equals(enemy) ||
+                board[coordinates[2]][coordinates[3]].getClass().getSimpleName().equals("Empty"))) return false;
         
 //        Pieces[][] tempBoard = board;
 //        
