@@ -367,6 +367,7 @@ public class Logic {
                                 
                                 if(board[x][y].getClass().getSuperclass().getSimpleName().equals(enemy)){
                                     if(board[x][y].isMoveValid(coor1, board, player, enemy)){
+                                        System.out.println("[TEST] Checking move: " + i + "" + j + ", " + x + "" + y);
                                         return true;
                                     }
                                 }
