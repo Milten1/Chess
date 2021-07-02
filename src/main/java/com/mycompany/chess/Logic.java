@@ -73,7 +73,7 @@ public class Logic {
         
         
         if(piece.isMoveValid(coordinates, this.logicBoard, this.enemy, this.player) && (piece.getClass().getSuperclass().getSimpleName().equals(player)) 
-                // && notInCheckAfterMove(coordinates, this.logicBoard, this.enemy, this.player)
+                 && notInCheckAfterMove(coordinates, this.logicBoard, this.enemy, this.player)
                 )
         {
             if(piece.getClass().getSimpleName().equals("WhitePawn") || piece.getClass().getSimpleName().equals("BlackPawn")) piece.beenMoved();
