@@ -9,8 +9,8 @@ public class Board {
     public Board() {
         board = new Pieces[8][8];
         
-        initializeBoard();
-//        testBoard();
+//        initializeBoard();
+        testBoard();
     }
     
     public void testBoard(){
@@ -22,9 +22,9 @@ public class Board {
             }
        }
         
-        board[0][4] = new WhitePawn();
+        board[0][4] = new WhiteKing();
         board[7][4] = new BlackKing();
-        board[0][0] = new WhiteRook();
+        board[1][0] = new WhiteRook();
         board[0][7] = new WhiteRook();
         board[7][7] = new BlackRook();
         board[7][0] = new BlackRook();
