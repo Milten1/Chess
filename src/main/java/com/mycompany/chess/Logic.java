@@ -98,24 +98,38 @@ public class Logic {
         
       if(isInCheck(logicBoard, enemy, player)) System.out.println(this.player + " player is in check!");
         
-        isEndOfTheGame(this.logicBoard, this.enemy, this.player);
+        isCheckMate(this.logicBoard, this.enemy, this.player);
+        isStaleMate(this.logicBoard, this.enemy, this.player);
         
         return logicBoard;
     }
     
-    public void isEndOfTheGame(Pieces[][] board, String enemy, String player){
+    public void isCheckMate(Pieces[][] board, String enemy, String player){
         
         Pieces[][] tempBoard = board;
         
-        if(isInCheck(board, enemy, player)) {
+        if(isInCheck(tempBoard, enemy, player)) {
             
-           //sprawdza wszystkie mozliwe ruchy i czy po wykonaniu ruchu nadal będzie szach, jeśli tak gra jest zakończona
+           //sprawdza wszystkie mozliwe ruchy i czy po wykonaniu ruchu nadal będzie szach, jeśli tak  to jest szachmat i gra jest zakończona
             
             if(false) this.isEnd = true;
         }
-        
-        
     }
+    
+    
+    public void isStaleMate(Pieces[][] board, String enemy, String player){
+        
+        Pieces[][] tempBoard = board;
+        
+        if(!isInCheck(tempBoard, enemy, player)) {
+
+            //sprawdza wszystkie mozliwe ruchy, jesli nie ma zadnego i nie ma szacha to jest pat i gra jest zakonczona
+            
+            if(false) this.isEnd = true;
+        }
+    }
+    
+    
     
     
     public boolean getChangePlayer(){
@@ -414,7 +428,7 @@ public class Logic {
         
         Pieces[][] tempBoard = board;
         
-        
+        Pieces helper = tempBoard[coor[2]][coor[3]];
         Pieces piece = tempBoard[coor[0]][coor[1]];
         
         tempBoard[coor[0]][coor[1]] = new Empty();
@@ -422,10 +436,14 @@ public class Logic {
         
         
         if(isInCheck(tempBoard, enemy, player)){
-            System.out.println("in check after move");
+            
+            tempBoard[coor[0]][coor[1]] = piece;
+            tempBoard[coor[2]][coor[3]] = helper;
+            
+            return false;
         }
         
-        return !(isInCheck(tempBoard, enemy, player));
+        return true;
     }
     
     public boolean getIsEnd(){
