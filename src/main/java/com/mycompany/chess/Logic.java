@@ -19,6 +19,7 @@ public class Logic {
         this.changePlayer = false;
         this.player = "White";
         this.enemy = "Black";
+        this.isEnd = false;
     }
     
     public Pieces[][] move(String command){
@@ -111,8 +112,31 @@ public class Logic {
         if(isInCheck(tempBoard, enemy, player)) {
             
            //sprawdza wszystkie mozliwe ruchy i czy po wykonaniu ruchu nadal będzie szach, jeśli tak  to jest szachmat i gra jest zakończona
-            
-            if(false) this.isEnd = true;
+           
+           this.isEnd = true;
+
+
+           for(int i = 0; i < 8; i++){
+               for(int j = 0; j < 8; j++){
+                   if(tempBoard[i][j].getClass().getSuperclass().getSimpleName().equals(player)){
+                       int[] coor1 = new int[4];
+                        
+                        coor1[2] = i;
+                        coor1[3] = j;
+                        
+                        for(int x = 0; x < 8; x++){
+                            for(int y = 0; y < 8; y++){
+                                coor1[0] = x;
+                                coor1[1] = y;
+                                
+                                if(notInCheckAfterMove(coor1, tempBoard, enemy, player))  {
+                                    this.isEnd = false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -122,10 +146,30 @@ public class Logic {
         Pieces[][] tempBoard = board;
         
         if(!isInCheck(tempBoard, enemy, player)) {
-
-            //sprawdza wszystkie mozliwe ruchy, jesli nie ma zadnego i nie ma szacha to jest pat i gra jest zakonczona
             
-            if(false) this.isEnd = true;
+            this.isEnd = true;
+            
+            for(int i = 0; i < 8; i++){
+                for(int j = 0; j < 8; j++){
+                    if(tempBoard[i][j].getClass().getSuperclass().getSimpleName().equals(player)){
+                        int[] coor1 = new int[4];
+                        
+                        coor1[2] = i;
+                        coor1[3] = j;
+                        
+                        for(int x = 0; x < 8; x++){
+                            for(int y = 0; y < 8; y++){
+                                coor1[0] = x;
+                                coor1[1] = y;
+                                
+                                if(tempBoard[x][y].isMoveValid(coor1, tempBoard, player, enemy)){
+                                    this.isEnd = false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     
