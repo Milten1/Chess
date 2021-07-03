@@ -21,17 +21,20 @@ public class Board {
                 board[i][j] = new Empty();
             }
        }
-        
-        board[0][4] = new WhiteKing();
-        board[7][4] = new BlackKing();
-        board[1][0] = new WhiteRook();
-        board[0][7] = new WhiteRook();
-        board[7][7] = new BlackRook();
-        board[7][0] = new BlackRook();
-        board[2][4] = new BlackKnight();
-        board[1][3] = new WhitePawn();
-        board[2][2] = new BlackBishop();
+//        
+//        board[0][4] = new WhiteKing();
+//        board[7][4] = new BlackKing();
+//        board[1][0] = new WhiteRook();
+//        board[0][7] = new WhiteRook();
+//        board[7][7] = new BlackRook();
+//        board[7][0] = new BlackRook();
+//        board[2][4] = new BlackKnight();
+//        board[1][3] = new WhitePawn();
+//        board[2][2] = new BlackBishop();
 
+        board[7][3] = new BlackKing();
+        board[5][4] = new WhiteKing();
+        board[5][2] = new WhiteQueen();
 
     }
     
