@@ -9,8 +9,8 @@ public class Board {
     public Board() {
         board = new Pieces[8][8];
         
-//        initializeBoard();
-        testBoard();
+        initializeBoard();
+//        testBoard();
     }
     
     public void testBoard(){
