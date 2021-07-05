@@ -1,6 +1,7 @@
 
 package com.mycompany.chess;
 
+import AI.*;
 import Pieces.*;
 import java.util.Scanner;
 
@@ -12,6 +13,7 @@ public class Logic {
     private String enemy;
     private boolean changePlayer;
     private boolean isEnd;
+    private RandomMoves random;
     
     public Logic() {
         this.board = new Board();
@@ -20,6 +22,7 @@ public class Logic {
         this.player = "White";
         this.enemy = "Black";
         this.isEnd = false;
+        this.random = new RandomMoves();
     }
     
     public Pieces[][] move(String command){
@@ -28,6 +31,8 @@ public class Logic {
         logicBoard = board.getBoard();
         
         int[] coordinates = convertCommandToCoordinates(command);
+        
+//        coordinates = random.nextRandomMove(logicBoard, player, enemy);
         
         Pieces piece = logicBoard[coordinates[0]][coordinates[1]];
         
