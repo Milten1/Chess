@@ -72,7 +72,7 @@ public class WhiteRook extends White{
         }
         
         if(coordinates[1] == coordinates[3]){
-            if(coordinates[0] < coordinates[2]){//UP
+            if(coordinates[0] < coordinates[2]){//up
                 for(int i = coordinates[0]+1; i <= coordinates[2];i++){
                     if(!((board[i][coordinates[1]].getClass().getSimpleName().equals("Empty")) || (board[i][coordinates[1]].getClass().getSuperclass().getSimpleName().equals(enemy)))) return false;
                 }
