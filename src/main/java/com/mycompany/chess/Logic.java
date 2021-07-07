@@ -14,15 +14,20 @@ public class Logic {
     private boolean changePlayer;
     private boolean isEnd;
     private RandomMoves random;
+    private int aiLevel;
     
-    public Logic() {
+    public Logic(int aiLevel) {
         this.board = new Board();
         this.logicBoard = board.getBoard();
         this.changePlayer = false;
         this.player = "White";
         this.enemy = "Black";
         this.isEnd = false;
-        this.random = new RandomMoves();
+        this.aiLevel = aiLevel;
+        
+        if(aiLevel >= 0){
+            this.random = new RandomMoves();
+        }
     }
     
     public Pieces[][] move(String command){
@@ -32,8 +37,7 @@ public class Logic {
         
         int[] coordinates = convertCommandToCoordinates(command);
         
-        coordinates = random.nextRandomMove(logicBoard, enemy, player);
-        System.out.println("Radom move: " + coordinates[0] + "" + coordinates[1] + "-" + coordinates[2] + "" + coordinates[3]);
+        if(this.player.equals("Black") && this.aiLevel == 0) coordinates = random.nextRandomMove(logicBoard, enemy, player);
         
         Pieces piece = logicBoard[coordinates[0]][coordinates[1]];
         
