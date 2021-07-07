@@ -21,16 +21,21 @@ public class RandomMoves {
                     if(tempBoard[i][j].getClass().getSuperclass().getSimpleName().equals(player)){
                         int[] coor = new int[4];
                         
-                        coor[2] = i;
-                        coor[3] = j;
+                        coor[0] = i;
+                        coor[1] = j;
                         
                         for(int x = 0; x < 8; x++){
                             for(int y = 0; y < 8; y++){
-                                coor[0] = x;
-                                coor[1] = y;
+                                coor[2] = x;
+                                coor[3] = y;
                                 
-                                if(tempBoard[x][y].isMoveValid(coor, tempBoard, enemy, player)){
+//                                System.out.println(coor[0] + "" + coor[1] + "-" + coor[2] + "" + coor[3]);
+                                
+                                if(tempBoard[i][j].isMoveValid(coor, tempBoard, enemy, player)){
                                     array.add(coor);
+//                                    System.out.print("added ");
+                                    
+//                                    System.out.println(coor[0] + "" + coor[1] + "-" + coor[2] + "" + coor[3]);
                                 }
                             }
                         }
@@ -40,6 +45,10 @@ public class RandomMoves {
         
         int index = (int)(Math.random() * array.size());
         
+        for(int[] coor: array){
+            System.out.println(coor[0] + "" + coor[1] + "-" + coor[2] + "" + coor[3]);
+        }
+
         return array.get(index);
     }
 }

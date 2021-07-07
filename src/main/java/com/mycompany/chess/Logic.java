@@ -32,7 +32,8 @@ public class Logic {
         
         int[] coordinates = convertCommandToCoordinates(command);
         
-//        coordinates = random.nextRandomMove(logicBoard, player, enemy);
+        coordinates = random.nextRandomMove(logicBoard, enemy, player);
+        System.out.println("Radom move: " + coordinates[0] + "" + coordinates[1] + "-" + coordinates[2] + "" + coordinates[3]);
         
         Pieces piece = logicBoard[coordinates[0]][coordinates[1]];
         
