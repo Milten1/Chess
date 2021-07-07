@@ -15,3 +15,8 @@ example - "a1-c3" where "a1" is starting field and "c3" is ending field
 - "exit" - ends the game
 - "save" saves the game
 - "load" loads the game
+
+## About AI
+
+There are 6 levels of AI. Level 0 means that the program choose a random move. 
+Levels from 1 to 5 uses the min-max algorithm to select the best move and number represents the depth of the algorithm
