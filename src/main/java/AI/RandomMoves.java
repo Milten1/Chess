@@ -1,10 +1,7 @@
 
 package AI;
-
 import Pieces.*;
 import java.util.ArrayList;
-import java.util.Random;
-
 
 public class RandomMoves {
     
@@ -14,7 +11,8 @@ public class RandomMoves {
         
         Pieces[][] tempBoard = board;
         
-        ArrayList<int[]> array = new ArrayList<int[]>();
+        ArrayList<Integer> a = new ArrayList<Integer>();
+        
         
         for(int i = 0; i < 8; i++){
                 for(int j = 0; j < 8; j++){
@@ -29,13 +27,12 @@ public class RandomMoves {
                                 coor[2] = x;
                                 coor[3] = y;
                                 
-//                                System.out.println(coor[0] + "" + coor[1] + "-" + coor[2] + "" + coor[3]);
-                                
                                 if(tempBoard[i][j].isMoveValid(coor, tempBoard, enemy, player)){
-                                    array.add(coor);
-//                                    System.out.print("added ");
                                     
-//                                    System.out.println(coor[0] + "" + coor[1] + "-" + coor[2] + "" + coor[3]);
+                                    a.add(coor[0]);
+                                    a.add(coor[1]);
+                                    a.add(coor[2]);
+                                    a.add(coor[3]);
                                 }
                             }
                         }
@@ -43,12 +40,19 @@ public class RandomMoves {
                 }
             }
         
-        int index = (int)(Math.random() * array.size());
-        
-        for(int[] coor: array){
-            System.out.println(coor[0] + "" + coor[1] + "-" + coor[2] + "" + coor[3]);
+        while(true){
+            int ind = (int)(Math.random() * a.size());
+            
+            if(ind % 4 == 0 || ind == 0) {
+                int[] result = new int[4];
+                
+                result[0] = a.get(ind);
+                result[1] = a.get(ind+1);
+                result[2] = a.get(ind+2);
+                result[3] = a.get(ind+3);
+                
+                return result;
+            }
         }
-
-        return array.get(index);
     }
 }
