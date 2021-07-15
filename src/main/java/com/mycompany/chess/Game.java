@@ -21,12 +21,12 @@ public class Game {
         
         if(command.equals("y")){
             System.out.println("Choose AI level \n"
-                    + "0. random moves \n"
-                    + "1. very easy \n"
-                    + "2. easy \n"
-                    + "3. medium \n"
-                    + "4. hard \n"
-                    + "5. very hard \n");
+                    + "1. random moves \n"
+                    + "2. very easy \n"
+                    + "3. easy \n"
+                    + "4. medium \n"
+                    + "5. hard \n"
+                    + "6. very hard \n");
             
             aiLevel = scanner.nextInt();
             
@@ -37,7 +37,7 @@ public class Game {
         
         while(true){
             
-            if(logic.getPlayer().equals("Black") && aiLevel == 0) {
+            if(logic.getPlayer().equals("Black") && aiLevel > 0) {
                 commands("a1-a2");
                 continue;
             }
@@ -104,9 +104,11 @@ public class Game {
                 break;
             }
             default: {
-                board.setBoard(logic.move(command));
-                
-                System.out.println("Move of player: " + logic.getPlayer());
+                if(command.toLowerCase().matches("[a-z][1-9]-[a-z][1-9]")){
+                    board.setBoard(logic.move(command));
+                    
+                    System.out.println("Move of player: " + logic.getPlayer());
+                } else System.out.println("Invalid command");
             }
         }
         

@@ -37,7 +37,7 @@ public class Logic {
         
         int[] coordinates = convertCommandToCoordinates(command);
         
-        if(this.player.equals("Black") && this.aiLevel == 0) coordinates = random.nextRandomMove(logicBoard, enemy, player);
+        if(this.player.equals("Black") && this.aiLevel == 1) coordinates = random.nextRandomMove(logicBoard, enemy, player);
         
         Pieces piece = logicBoard[coordinates[0]][coordinates[1]];
         
