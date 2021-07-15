@@ -18,5 +18,5 @@ example - "a1-c3" where "a1" is starting field and "c3" is ending field
 
 ## About AI
 
-There are 6 levels of AI. Level 0 means that the program choose a random move. 
-Levels from 1 to 5 uses the min-max algorithm to select the best move and number represents the depth of the algorithm
+There are 6 levels of AI. Level 1 means that the program choose a random move. 
+Levels from 2 to 6 uses the min-max algorithm to select the best move and number represents the depth of the algorithm
