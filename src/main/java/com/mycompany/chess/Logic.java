@@ -3,6 +3,10 @@ package com.mycompany.chess;
 
 import AI.*;
 import Pieces.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 
@@ -236,11 +240,111 @@ public class Logic {
     
 
     public void saveGame(String name) {
-        
+        name = name + ".txt";
+        try{
+            File save = new File(name);
+            if (save.createNewFile()) {
+                try {
+                    FileWriter saver = new FileWriter(name);
+                    
+                    logicBoard = board.getBoard();
+                    
+                    for(int i = 0; i < 8; i++){
+                        for(int j = 0; j < 8; j++){
+                            saver.write(logicBoard[i][j].toString() + "\n");
+                        }
+                    }
+                    
+                    saver.close();
+                } catch (IOException e) {
+                    System.out.println("An error occurred");
+                    e.printStackTrace();
+                }
+                
+                System.out.println("Game saved in: " + save.getName());
+            } else System.out.println("Save already exists");
+            
+        }catch(IOException e){
+            System.out.println("An error occurred");
+            e.printStackTrace();
+        }
     }
 
     public void loadGame(String name) {
-        
+        name = name + ".txt";
+        try(Scanner scan  = new Scanner(Paths.get(name))){
+            logicBoard = board.getBoard();
+            
+            for(int i = 0; i < 8; i++){
+                for(int j = 0; j < 8; j++){
+                    if(scan.hasNextLine()){
+                        String row = scan.nextLine();
+                        
+                        switch(row.charAt(0)){
+                            case ' ':{
+                                   logicBoard[i][j] = new Empty();
+                                   break;
+                            }
+                            case '♙':{
+                                   logicBoard[i][j] = new WhitePawn();
+                                   break;
+                            }
+                            case '♖':{
+                                   logicBoard[i][j] = new WhiteRook();
+                                   break;
+                            }
+                            case '♘':{
+                                   logicBoard[i][j] = new WhiteKnight();
+                                   break;
+                            }
+                            case '♗':{
+                                   logicBoard[i][j] = new WhiteBishop();
+                                   break;
+                            }
+                            case '♕':{
+                                   logicBoard[i][j] = new WhiteQueen();
+                                   break;
+                            }
+                            case '♔':{
+                                   logicBoard[i][j] = new WhiteKing();
+                                   break;
+                            }
+                            case '♟':{
+                                   logicBoard[i][j] = new BlackPawn();
+                                   break;
+                            }
+                            case '♜':{
+                                   logicBoard[i][j] = new BlackRook();
+                                   break;
+                            }
+                            case '♞':{
+                                   logicBoard[i][j] = new BlackKnight();
+                                   break;
+                            }
+                            case '♝':{
+                                   logicBoard[i][j] = new BlackBishop();
+                                   break;
+                            }
+                            case '♛':{
+                                   logicBoard[i][j] = new BlackQueen();
+                                   break;
+                            }
+                            case '♚':{
+                                   logicBoard[i][j] = new BlackKing();
+                                   break;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            System.out.println("Game loaded");
+            board.printBoard();
+            
+        }catch(Exception e){
+            System.out.println("An error occured");
+            e.printStackTrace();
+        }
     }
 
     public String getPlayer() {
